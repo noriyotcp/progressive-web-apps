@@ -1,0 +1,15 @@
+{
+  "name": "progressive-web-apps",
+  "version": "1.0.0",
+  "description": "https://app.pluralsight.com/library/courses/web-apps-progressive-getting-started/table-of-contents",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node_modules/http-server/bin/http-server -c -1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Noriyo Akita <noriyo.akita@gmail.com> (https://github.com/noriyotcp)",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
