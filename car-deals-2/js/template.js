@@ -4,6 +4,7 @@ const generateCarCard = (car) => {
 };
 
 export const appendCars = (cars) => {
+  document.getElementById("first-load").innerHTML = "";
   if (!cars) {
     return;
   }
