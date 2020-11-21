@@ -3,9 +3,28 @@ import { appendCars } from "./template.js";
 import { addCars, getCars, getLastItemId } from "./clientStorage.js";
 
 export const loadCars = async () => {
-  await loadCarsRequest();
+  document.getElementById("connection-status").innerHTML = await fetchPromise();
   const cars = await getCars();
   appendCars(cars);
+};
+
+const fetchPromise = () => {
+  const promiseRequest = new Promise(async (resolve) => {
+    try {
+      await loadCarsRequest();
+    } catch (error) {
+      resolve("No connection, showing offline results");
+    }
+    resolve("This connection is OK, showing latest results");
+  });
+  const promiseHanging = new Promise((resolve) => {
+    setTimeout(
+      resolve,
+      3000,
+      "The connection is hanging, showing offline results"
+    );
+  });
+  return Promise.race([promiseRequest, promiseHanging]);
 };
 
 export const loadCarsRequest = async () => {
