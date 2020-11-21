@@ -1,10 +1,10 @@
 import { API_URL_LATEST } from "./constants.js";
 import { appendCars } from "./template.js";
+import { addCars } from "./clientStorage.js";
 
 export const loadCars = async () => {
   const response = await fetch(API_URL_LATEST);
   const data = await response.json();
   appendCars(data.cars);
-  // eslint-disable-next-line no-console
-  console.log(data);
+  await addCars(data.cars);
 };
