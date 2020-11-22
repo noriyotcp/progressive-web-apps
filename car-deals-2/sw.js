@@ -1,6 +1,6 @@
 "use strict";
 
-const carDealsCacheName = "carDealsCacheV2";
+const carDealsCacheName = "carDealsCacheV1";
 const carDealsCachePagesName = "carDealsCachePagesV1";
 const carDealsCache = [carDealsCacheName, carDealsCachePagesName];
 const carDealsCacheFiles = [
@@ -20,6 +20,7 @@ const carDealsCacheFiles = [
 
 self.addEventListener("install", (event) => {
   console.log("From SW: Install Event");
+  self.skipWaiting();
   const preCache = async () => {
     const cache = await caches.open(carDealsCacheName);
     return cache.addAll(carDealsCacheFiles);
@@ -29,6 +30,7 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   console.log("From SW: Activate Event");
+  self.clients.claim();
   const clearCache = async () => {
     const keys = await caches.keys();
     keys.forEach(async k => {

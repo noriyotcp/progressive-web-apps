@@ -21,4 +21,19 @@ export default async () => {
   serviceWorker?.addEventListener("statechange", (e) => {
     console.log(e.target.state);
   });
+
+  swRegistration.addEventListener("updatefound", () => {
+    serviceWorker?.addEventListener("statechange", (e) => {
+      console.log("New service worker state: ", e.target.state);
+    });
+    console.log("New service worker found!", swRegistration);
+  });
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    console.log("Controller Changed!");
+  });
+
+  setInterval(() => {
+    swRegistration.update();
+  }, 1000 * 5);
 };
