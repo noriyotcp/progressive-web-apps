@@ -1,3 +1,4 @@
+import { preCacheDetailsPage } from "./carPageService.js";
 import { API_URL_LATEST } from "./constants.js";
 import { appendCars } from "./template.js";
 import { addCars, getCars, getLastItemId } from "./clientStorage.js";
@@ -32,4 +33,5 @@ export const loadCarsRequest = async () => {
   const response = await fetch(requestURL);
   const data = await response.json();
   await addCars(data.cars);
+  data.cars.forEach(preCacheDetailsPage);
 };
