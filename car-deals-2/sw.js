@@ -60,7 +60,13 @@ self.addEventListener("fetch", (event) => {
   } else if (requestPath === imagePath) {
     return event.respondWith(networkFirstStrategy(event.request));
   }
+  return event.respondWith(cacheFirstStrategy(event.request));
 });
+
+const cacheFirstStrategy = async (request) => {
+  const cacheResponse = await caches.match(request);
+  return cacheResponse || fetchRequestAndCache(request);
+};
 
 const networkFirstStrategy = async (request) => {
   try {
