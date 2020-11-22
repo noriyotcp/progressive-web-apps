@@ -33,6 +33,16 @@ export default async () => {
     console.log("Controller Changed!");
   });
 
+  navigator.serviceWorker.addEventListener("message", e => {
+    const clientId = e.data.clientId;
+    const message = e.data.message;
+    console.log("From Client: ", clientId, message);
+  });
+
+  if (navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage("hello");
+  }
+
   setInterval(() => {
     swRegistration.update();
   }, 1000 * 5);

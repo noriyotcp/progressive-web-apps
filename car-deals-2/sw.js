@@ -3,7 +3,11 @@
 const carDealsCacheName = "carDealsCacheV1";
 const carDealsCacheImagesName = "carDealsCacheImagesV1";
 const carDealsCachePagesName = "carDealsCachePagesV1";
-const carDealsCache = [carDealsCacheName, carDealsCacheImagesName, carDealsCachePagesName];
+const carDealsCache = [
+  carDealsCacheName,
+  carDealsCacheImagesName,
+  carDealsCachePagesName,
+];
 const carDealsCacheFiles = [
   "https://cdn.jsdelivr.net/npm/pwacompat@2.0.17/pwacompat.min.js",
   "https://cdn.jsdelivr.net/gh/bstavroulakis/progressive-web-apps/resources/localforage.js",
@@ -96,3 +100,7 @@ const getCacheName = (request) => {
     return carDealsCacheName;
   }
 };
+
+self.addEventListener("message", (e) => {
+  e.source.postMessage({ clientId: e.source.id, message: "sw" });
+});
